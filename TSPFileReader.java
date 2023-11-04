@@ -52,12 +52,14 @@ public class TSPFileReader {
 
 			// tạo và trả về một đối tượng TSPProblem chứa các thông tin đã đọc
 			return new TSPProblem(n, vertexNames, weightMatrix, trafficJams, startPoint, startTime);
+
 		} finally {
 			// Đóng tệp tin sau khi đọc hoặc khi có lỗi đọc tệp tin
 			if (reader != null) {
 				reader.close();
 			}
 		}
+
 	}
 
 

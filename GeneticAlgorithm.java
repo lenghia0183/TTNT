@@ -48,7 +48,6 @@ public class GeneticAlgorithm {
 			}
 			Fitness.add(fitness2);
 		}
-
 	}
 
 	public static void Selection() {
@@ -71,6 +70,7 @@ public class GeneticAlgorithm {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void Hybridize(TSPProblem tsp) {
 		while (results.size() != individual) {
 			ArrayList<Integer> dad = (ArrayList<Integer>) results.get(ran.nextInt(results.size())).clone();
@@ -96,7 +96,6 @@ public class GeneticAlgorithm {
 			result.add(dad.get(0));
 			results.add(new ArrayList<>(result));
 		}
-
 	}
 
 	public static void Mutate(TSPProblem tsp) {
@@ -114,34 +113,33 @@ public class GeneticAlgorithm {
 			count--;
 		}
 		results.set(pos, (result));
-
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void Print(TSPProblem tsp) {
 		ArrayList<Integer> temp = (ArrayList<Integer>) Fitness.clone();
 		Collections.sort(temp);
 		int best = temp.get(0);
-		for (int i = 0; i < individual; i++) {
+		for (int i = 0; i < individual; i++) {  
 			if (Fitness.get(i) == best)
-				tsp.Showtheway(results.get(i), best);
 
+				tsp.Showtheway(results.get(i), best);
 		}
 
 	}
 
 	public static void main(String[] args) throws IOException {
-		String filename = "C:\\GitHub\\TSPProblem\\data\\data.txt";
+		String filename = "D:\\JP301_NguyenHieu\\BuiltG1\\cmsystem\\src\\main\\java\\TSPProblem\\data\\data1.txt";
 		TSPProblem tsp = TSPFileReader.readTSPProblemFromFile(filename);
 		InitialPopulation(tsp);
 		for (int i = 0; i < 100; i++) {
 			EvulationFitness(tsp);
-			Print(tsp);
-			Selection();
-			Hybridize(tsp);
-			Mutate(tsp);
+			Selection();//xóa bớt phần tử cá thể = 40 fitness = 40
+			Hybridize(tsp);//cá thể =50 fitness =40
+			Mutate(tsp);//cá thể =50 fitness =40
 		}
-
-
+		EvulationFitness(tsp);
+		Print(tsp);
 	}
 
 }

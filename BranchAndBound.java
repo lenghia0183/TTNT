@@ -8,7 +8,7 @@ import java.util.*;
 public class BranchAndBound {
 
 	private static int[] bestPath; // Chu trình tốt nhất
-	private static LocalTime bestEndTime; // Thời gian kết thúc sớm nhất
+	private static LocalTime bestEndTime; // Thời điểm kết thúc sớm nhất
 
 	public static void solveTSP(TSPProblem tsp) {
 
@@ -29,13 +29,18 @@ public class BranchAndBound {
 		// Đặt thời gian tính toán = thời gian xuất phát
 		LocalTime currTime = tsp.getStartTime();
 
-		// Thêm thời gian bắt đầu vào bestEndTime
+		// Thêm bestEndTime
 		bestEndTime = LocalTime.parse("23:59");
 
 		TSPRecursive(tsp, visisted, currentPath, crpoint, currTime, strpoint, 1);
+		
+		tsp.Showtheway(bestPath, (int)Duration.between(tsp.getStartTime(), bestEndTime).toMinutes());
+
 
 	}
-
+			
+			
+	
 	public static void TSPRecursive(TSPProblem tsp, boolean visited[], int[] currentPath, int currpoint,
 			LocalTime currTime, int strpoint, int index) {
 		for (int i = 0; i < tsp.getN(); i++) {
@@ -60,7 +65,6 @@ public class BranchAndBound {
 									bestEndTime = currTime;
 									bestPath = currentPath.clone();
 
-									tsp.Showtheway(bestPath, (int)Duration.between(tsp.getStartTime(), currTime).toMinutes());
 								}
 								currTime = currTime.minusMinutes(tsp.getWeightMatrix()[i][strpoint]);
 							}
@@ -78,7 +82,7 @@ public class BranchAndBound {
 	}
 
 	public static void main(String[] args) {
-		String filename = "C:\\GitHub\\TSPProblem\\data\\data.txt";
+		String filename = "D:\\JP301_NguyenHieu\\BuiltG1\\cmsystem\\src\\main\\java\\TSPProblem\\data\\data1.txt";
 
 		try {
 			TSPProblem tsp = TSPFileReader.readTSPProblemFromFile(filename);

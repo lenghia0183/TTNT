@@ -54,7 +54,7 @@ public class TSPProblem {
 	}
 	
 	public void Showtheway(ArrayList<Integer> a, int totalTime) {
-		for(int i=0; i<a.size();i++) {
+		for(int i=0; i<a.size()-1;i++) {
 			System.out.print(getVertexNames()[a.get(i)]+"->");
 		}
 		System.out.println(getVertexNames()[a.get(a.size()-1)]);
